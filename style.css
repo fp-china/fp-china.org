@@ -1,0 +1,25 @@
+
+body {
+    margin: 0;
+    padding: 100px 200px;
+    background: black;
+    color: white;
+    font-size: 20px;
+    font-family: "Source Han Sans CN", "Hiragino Sans GB", "Microsoft Yahei", Sans-serif;
+}
+
+.logo {
+    font-size: 130px;
+    font-family: fantasy;
+    color: white;
+}
+
+.about {}
+
+div {
+  line-height: 2em;
+}
+
+a {
+    color: hsl(244, 100%, 81%);
+}
