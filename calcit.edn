@@ -412,7 +412,7 @@
                 :type :expr, :by "root", :at 1523070414841, :id "SkwAr2riM"
                 :data {
                  "T" {:type :leaf, :by "root", :at 1523070418220, :text ":padding", :id "SkwAr2riMleaf"}
-                 "j" {:type :leaf, :by "root", :at 1523070419182, :text "16", :id "rkS50B2rsf"}
+                 "j" {:type :leaf, :by "root", :at 1523072858451, :text "\"32px 16px", :id "rkS50B2rsf"}
                 }
                }
               }

@@ -26,7 +26,7 @@
  comp-footer
  ()
  (div
-  {:style {:background-color "rgb(102,102,102)", :padding 16}}
+  {:style {:background-color "rgb(102,102,102)", :padding "32px 16px"}}
   (div
    {:style {:max-width 600, :margin :auto}}
    (a
