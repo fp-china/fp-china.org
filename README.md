@@ -1,17 +1,20 @@
 
-FP China home page
+函数式编程中文社区(Functional Programming in China)
 ----
 
-Home page: http://fp-china.org
+http://fp-china.org
 
 ### Languages
 
+* Clojure
 * Haskell
-* Racket
-* PureScript
-* Elm
-* ClojureScript
+* Elixir
+* ReasonML/Elm
+* Scala
+* WebAssembly
 
-### 关于
+反馈欢迎联系 [@jiyinyiyong](https://twitter.com/jiyinyiyong).
 
-这个站点是为以后的函数式编程社区做准备. 有想法前联系微博@题叶.
+### Workflow
+
+https://github.com/mvc-works/calcit-workflow
