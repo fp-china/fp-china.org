@@ -19,7 +19,7 @@
    (merge
     base-info
     {:styles ["/entry/main.css" "http://localhost:8100/main.css"],
-     :scripts ["/main.js"],
+     :scripts ["/client.js"],
      :inline-styles []})))
 
 (def preview? (= "preview" js/process.env.prod))
