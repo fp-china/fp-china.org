@@ -1,10 +1,10 @@
 
-{:source-paths ["src" "cli"]
+{:source-paths ["src" "cli" "macros"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
                 [mvc-works/verbosely    "0.1.2"]
-                [mvc-works/shell-page   "0.1.7"]
+                [mvc-works/shell-page   "0.1.8"]
                 [respo                  "0.8.20"]
-                [respo/ui               "0.3.6"]
+                [respo/ui               "0.3.7"]
                 [respo/value            "0.2.4"]
                 [respo/markdown         "0.2.1"]
                 [respo/reel             "0.3.2"]]
@@ -16,12 +16,13 @@
                    :modules {:client {:entries [app.main]}}
                    :devtools {:after-load app.main/reload!
                               :http-root "target"
-                              :http-port 7000}
+                              :http-port 7000
+                              :loader-mode :eval}
                    :compiler-options {:infer-externs :auto}
                    :release {:output-dir "dist/"
                              :module-hash-names 8
                              :build-options {:manifest-name "assets.edn"}}}
           :page {:target :node-script
                  :output-to "target/page.js"
-                 :main app.render/main!
-                 :devtools {:after-load app.render/main!}}}}
+                 :main app.page/main!
+                 :devtools {:after-load app.page/main!}}}}
