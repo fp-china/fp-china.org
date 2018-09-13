@@ -50,7 +50,7 @@
 * [Scheme 中文论坛](http://theschemer.org)
 * LISP 微信群(联系 `jiyinyiyong`)
 * "Expert Scheme" QQ 群 523791077
-* "Scheme" QQ 群 724577239
+* `(Chez (Scheme))` QQ 群 724577239
 * `(Chez (Scheme))` 微信群(联系 `RegalisLuxus`)
 
 ### FP 水群
