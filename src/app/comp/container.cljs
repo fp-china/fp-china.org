@@ -2,15 +2,14 @@
 (ns app.comp.container
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros
+            [respo.core
              :refer
              [defcomp cursor-> action-> mutation-> <> div button textarea span a]]
-            [verbosely.core :refer [verbosely!]]
             [respo.comp.space :refer [=<]]
             [reel.comp.reel :refer [comp-reel]]
             [respo-md.comp.md :refer [comp-md comp-md-block]]
             [app.config :refer [dev?]]
-            [app.macros :refer [inline-resource]]))
+            [cumulo-util.build :refer [inline-resource]]))
 
 (defcomp
  comp-content

@@ -1,23 +1,23 @@
 
-{:source-paths ["src" "cli" "macros"]
+{:source-paths ["src" "cli"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
-                [mvc-works/verbosely    "0.1.2"]
-                [mvc-works/shell-page   "0.1.8"]
-                [respo                  "0.8.20"]
-                [respo/ui               "0.3.7"]
-                [respo/value            "0.2.4"]
-                [respo/markdown         "0.2.1"]
-                [respo/reel             "0.3.2"]]
+                [mvc-works/shell-page   "0.1.10"]
+                [respo                  "0.10.2"]
+                [respo/ui               "0.3.10"]
+                [respo/value            "0.2.5"]
+                [respo/markdown         "0.2.4"]
+                [respo/reel             "0.3.4"]
+                [cumulo/util            "0.1.4"]
+                [org.clojure/core.incubator "0.1.4"]]
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
  :socket-repl {:port 0}
  :builds {:client {:target :browser
                    :output-dir "target/"
                    :asset-path "./"
-                   :modules {:client {:entries [app.main]}}
+                   :modules {:client {:init-fn app.main/main!}}
                    :devtools {:after-load app.main/reload!
                               :http-root "target"
-                              :http-port 7000
-                              :loader-mode :eval}
+                              :http-port 7000}
                    :compiler-options {:infer-externs :auto}
                    :release {:output-dir "dist/"
                              :module-hash-names 8
