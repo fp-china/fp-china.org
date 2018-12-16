@@ -38,6 +38,7 @@
 ### WebAssembly
 
 * 微信群(联系 `jiyinyiyong`)
+* [WASM Rocks](http://wasmrocks.com)
 * [分类论坛](https://www.w3ctech.com/category/18)
 
 ### Scala
