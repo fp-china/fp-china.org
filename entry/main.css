@@ -1,12 +1,12 @@
 
 body {
   margin: 0;
-  font-display: optional;
   background-color: rgb(102,102,102);
 }
 
 body * {
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 ::-webkit-scrollbar {

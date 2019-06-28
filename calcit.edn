@@ -1,4 +1,8 @@
 {
+ :users {
+  "rJG4IHzWf" {:id "rJG4IHzWf", :name "chen", :nickname "chen", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
+  "root" {:id "root", :name "root", :nickname "root", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
+ }
  :ir {
   :package "app"
   :files {
@@ -125,13 +129,13 @@
          :type :expr, :by "root", :at 1536598765657, :id "cQ7j7Qvgi"
          :data {
           "T" {:type :leaf, :by "root", :at 1536598766018, :text "[]", :id "cQ7j7Qvgileaf"}
-          "j" {:type :leaf, :by "rJG4IHzWf", :at 1544952719175, :text "cumulo-util.build", :id "ppRrSRZbaQ"}
+          "j" {:type :leaf, :by "rJG4IHzWf", :at 1561741521333, :text "shadow.resource", :id "ppRrSRZbaQ"}
           "r" {:type :leaf, :by "root", :at 1536598768514, :text ":refer", :id "GqP7ePKlS8"}
           "v" {
            :type :expr, :by "root", :at 1536598768716, :id "uUYL2l34Yk"
            :data {
             "T" {:type :leaf, :by "root", :at 1536598769057, :text "[]", :id "UsUPQCrRx"}
-            "j" {:type :leaf, :by "root", :at 1536598772456, :text "inline-resource", :id "WvSbK5Gm1Y"}
+            "j" {:type :leaf, :by "rJG4IHzWf", :at 1561741523124, :text "inline", :id "WvSbK5Gm1Y"}
            }
           }
          }
@@ -352,7 +356,7 @@
              "j" {
               :type :expr, :by "root", :at 1536598751720, :id "XlG01ixjS"
               :data {
-               "T" {:type :leaf, :by "root", :at 1536598753819, :text "inline-resource", :id "SkG0L6LfXX"}
+               "T" {:type :leaf, :by "rJG4IHzWf", :at 1561741660985, :text "inline", :id "SkG0L6LfXX"}
                "j" {:type :leaf, :by "root", :at 1536598757336, :text "\"videos.md", :id "PIWTlLpkhx"}
               }
              }
@@ -391,7 +395,7 @@
              "j" {
               :type :expr, :by "root", :at 1536598726223, :id "i7T2Xxh4O"
               :data {
-               "T" {:type :leaf, :by "root", :at 1536598730402, :text "inline-resource", :id "ByVfx8hSsM"}
+               "T" {:type :leaf, :by "rJG4IHzWf", :at 1561741662356, :text "inline", :id "ByVfx8hSsM"}
                "j" {:type :leaf, :by "root", :at 1536598734716, :text "\"sites.md", :id "NIO1_D8rf"}
               }
              }
@@ -879,13 +883,6 @@
            "j" {:type :leaf, :by "rJG4IHzWf", :at 1544952221387, :text "\"http://cdn.tiye.me/fp-china-org/", :id "4iV6CIFEdIn"}
           }
          }
-         "y" {
-          :type :expr, :by "rJG4IHzWf", :at 1544952210691, :id "Q5NzAiF2K9w"
-          :data {
-           "T" {:type :leaf, :by "rJG4IHzWf", :at 1544952210691, :text ":cdn-folder", :id "KilBWKlXfOF"}
-           "j" {:type :leaf, :by "rJG4IHzWf", :at 1544952231246, :text "\"tiye.me:cdn/fp-china-org", :id "kZ8EcRgoGn7"}
-          }
-         }
          "yT" {
           :type :expr, :by "rJG4IHzWf", :at 1544952210691, :id "FKvZnIbMgrg"
           :data {
@@ -898,13 +895,6 @@
           :data {
            "T" {:type :leaf, :by "rJG4IHzWf", :at 1544952210691, :text ":icon", :id "v5IGPMWrMk_"}
            "j" {:type :leaf, :by "rJG4IHzWf", :at 1544952210691, :text "\"http://cdn.tiye.me/logo/mvc-works.png", :id "uobtmYHOPj-"}
-          }
-         }
-         "yr" {
-          :type :expr, :by "rJG4IHzWf", :at 1544952210691, :id "EekjqlY6Alx"
-          :data {
-           "T" {:type :leaf, :by "rJG4IHzWf", :at 1544952210691, :text ":upload-folder", :id "n87VXh36oNc"}
-           "j" {:type :leaf, :by "rJG4IHzWf", :at 1544952263511, :text "\"tiye.me:repo/fp-china/fp-china.org/", :id "ZsY6xjIrzVd"}
           }
          }
         }
@@ -2295,15 +2285,5 @@
    }
   }
  }
- :sessions {}
- :users {
-  "rJG4IHzWf" {:id "rJG4IHzWf", :name "chen", :nickname "chen", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
-  "root" {:id "root", :name "root", :nickname "root", :password "d41d8cd98f00b204e9800998ecf8427e", :avatar nil, :theme :star-trail}
- }
- :saved-files {}
  :configs {:storage-key "calcit.edn", :extension ".cljs", :output "src", :port 6001}
- :repl {
-  :alive? false
-  :logs {}
- }
 }

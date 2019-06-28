@@ -3,7 +3,7 @@
 ### Clojure
 
 * [中文论坛](http://clojure-china.org)
-* 微信群(联系 `jiyinyiyong`)
+* 微信群(联系 `jiyinyiyong`), [备份](https://wewe.t9t.io/chat/Clojure)
 * [导航页面](http://map.clj.im)
 * QQ 群 130107204
 * [英文 Discord](https://discord.gg/X6yrEjc)
@@ -13,7 +13,7 @@
 ### Haskell
 
 * QQ 群 72874436
-* 微信群(联系 `jiyinyiyong`)
+* 微信群(联系 `jiyinyiyong`), [备份](https://wewe.t9t.io/chat/Haskell)
 * [英文分类 Slack](http://fpchat.com/)
 * [中文子论坛](http://clj.im/c/haskell)
 * [中文论坛](http://a.haskellcn.org)
