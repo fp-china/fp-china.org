@@ -1,0 +1,6 @@
+
+{:host "tiye.me"
+ :uploads [{:from "dist/*"
+            :to "cdn/fp-china-org/"}
+           {:from "dist/{index.html,manifest.json}"
+            :to "repo/fp-china/fp-china.org/"}]}

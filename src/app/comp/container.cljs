@@ -9,7 +9,7 @@
             [reel.comp.reel :refer [comp-reel]]
             [respo-md.comp.md :refer [comp-md comp-md-block]]
             [app.config :refer [dev?]]
-            [cumulo-util.build :refer [inline-resource]]))
+            [shadow.resource :refer [inline]]))
 
 (defcomp
  comp-content
@@ -18,9 +18,9 @@
   {:style {:background-color :white}}
   (div
    {:style {:padding 16, :max-width 600, :margin :auto, :font-size 16}}
-   (comp-md-block (inline-resource "videos.md") {:style {}})
+   (comp-md-block (inline "videos.md") {:style {}})
    (=< nil 40)
-   (comp-md-block (inline-resource "sites.md") {:style {}}))))
+   (comp-md-block (inline "sites.md") {:style {}}))))
 
 (defcomp
  comp-footer
