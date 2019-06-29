@@ -3,35 +3,31 @@
 ### Clojure
 
 * [中文论坛](http://clojure-china.org)
+* [英文 Slack](http://clojurians.net/)
 * 微信群(联系 `jiyinyiyong`), [备份](https://wewe.t9t.io/chat/Clojure)
 * [导航页面](http://map.clj.im)
 * QQ 群 130107204
 * [英文 Discord](https://discord.gg/X6yrEjc)
-* [英文 Slack](http://clojurians.net/)
-* [微博机器人](http://weibo.com/clojurechina)
 
 ### Haskell
 
 * QQ 群 72874436
 * 微信群(联系 `jiyinyiyong`), [备份](https://wewe.t9t.io/chat/Haskell)
+* [英文论坛](https://discourse.haskell.org)
 * [英文分类 Slack](http://fpchat.com/)
 * [中文子论坛](http://clj.im/c/haskell)
-* [中文论坛](http://a.haskellcn.org)
 * [HaskellCNOrg 微博](http://weibo.com/haskellcnorg)
-* [微博机器人](http://weibo.com/haskellchina)
 
 ### Elixir
 
-* 微信群(联系 `jiyinyiyong`)
-* [中文论坛](http://elixir-cn.com)
-* QQ 群 249122869
 * [英文论坛](https://elixirforum.com/)
+* 微信群(联系 `jiyinyiyong`)
+* QQ 群 249122869
 * [英文 Slack](http://elixir-slackin.herokuapp.com/)
-* [微博机器人](http://weibo.com/elixircn)
 
 ### ReasonML, Elm, BuckleScript 群
 
-* 微信群(联系 `jiyinyiyong`)
+* 微信群(联系 `jiyinyiyong`), [备份](https://wewe.t9t.io/chat/LISP)
 * [英文论坛](https://reasonml.chat/)
 * [英文 Slack](https://elmlang.herokuapp.com/)
 
@@ -62,4 +58,4 @@
 
 ### 其他
 
-欢迎反馈...
+欢迎[反馈](https://github.com/fp-china/fp-china.org/issues)...
