@@ -16,7 +16,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "@calcit/procs": "^0.4.4",
-    "shortid": "^2.2.14"
+    "@calcit/procs": "^0.4.5",
+    "shortid": "^2.2.16"
   }
 }
