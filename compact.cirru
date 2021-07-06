@@ -28,6 +28,9 @@
             div
               {} $ :style
                 {} (:padding 16) (:max-width 600) (:margin :auto) (:font-size 16)
+              comp-md-block (inline "\"events.md")
+                {} $ :style ({})
+              =< nil 40
               comp-md-block (inline "\"videos.md")
                 {} $ :style ({})
               =< nil 40
