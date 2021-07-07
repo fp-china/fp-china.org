@@ -9,7 +9,7 @@
         ns app.comp.container $ :require
           [] respo.util.format :refer $ [] hsl
           [] respo-ui.core :as ui
-          [] respo.core :refer $ [] defcomp cursor-> action-> mutation-> <> div button textarea span a
+          [] respo.core :refer $ [] defcomp <> div button textarea span a
           [] respo.comp.space :refer $ [] =<
           [] reel.comp.reel :refer $ [] comp-reel
           [] respo-md.comp.md :refer $ [] comp-md comp-md-block
@@ -49,11 +49,18 @@
         |comp-header $ quote
           defcomp comp-header () $ div
             {} $ :style
-              {} (:padding "\"32px 16px") (:background-color "\"rgb(102,102,102)") (:font-size 24)
+              {} (:padding "\"32px 16px") (:background-color "\"rgb(102,102,102)") (:color :white)
             div
               {} $ :style
-                merge ui/row-parted $ {} (:max-width 600) (:margin :auto)
-              <> "\"函数式编程中文社区" $ {} (:color :white)
+                merge ui/row-middle $ {} (:max-width 600) (:margin :auto)
+              <> "\"函数式编程中文社区" $ {} (:font-size 24)
+              =< 16 nil
+              a $ {}
+                :style $ {}
+                  :color $ hsl 200 70 90
+                :inner-text "\"讨论组"
+                :href "\"https://github.com/fp-china/fp-china.org/discussions"
+                :target "\"_blank"
         |inline $ quote
           defmacro inline (path)
             read-file $ str "\"content/" path
