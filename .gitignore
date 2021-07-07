@@ -1,8 +1,8 @@
 
-/target/
 /dist
 /node_modules
-.cpcache/
-.shadow-cljs/
+js-out/
+.calcit-error.cirru
+.compact-inc.cirru
 
-.nrepl-port
+/index.html

@@ -50,12 +50,6 @@
 * `(Chez (Scheme))` QQ 群 724577239
 * `(Chez (Scheme))` 微信群(联系 `RegalisLuxus`)
 
-### FP 水群
-
-* [中文 Discord](https://discord.gg/CXkwkFC)
-* [英文 Discord](https://discord.gg/nntGvbh)
-* 微信群(灌水群, 需要加入微信联系 `jiyinyiyong`)
-
 ### 其他
 
 欢迎[反馈](https://github.com/fp-china/fp-china.org/issues)...
