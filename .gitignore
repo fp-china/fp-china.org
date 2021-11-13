@@ -6,3 +6,5 @@ js-out/
 .compact-inc.cirru
 
 /index.html
+
+yarn-error.log

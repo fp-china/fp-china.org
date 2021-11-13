@@ -3,6 +3,7 @@
   :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/main!)
     :modules $ [] |respo.calcit/ |respo-ui.calcit/ |memof/ |respo-markdown.calcit/
     :version nil
+  :entries $ {}
   :files $ {}
     |app.comp.container $ {}
       :ns $ quote
@@ -29,6 +30,9 @@
               {} $ :style
                 {} (:padding 16) (:max-width 600) (:margin :auto) (:font-size 16)
               comp-md-block (inline "\"events.md")
+                {} $ :style ({})
+              =< nil 40
+              comp-md-block (inline "\"langs.md")
                 {} $ :style ({})
               =< nil 40
               comp-md-block (inline "\"videos.md")
@@ -64,7 +68,6 @@
         |inline $ quote
           defmacro inline (path)
             read-file $ str "\"content/" path
-      :proc $ quote ()
     |app.config $ {}
       :ns $ quote (ns app.config)
       :defs $ {}
@@ -72,7 +75,6 @@
           def dev? $ = "\"dev" (get-env "\"mode")
         |site $ quote
           def site $ {} (:storage "\"fp-china") (:dev-ui "\"http://localhost:8100/main.css") (:release-ui "\"http://cdn.tiye.me/favored-fonts/main.css") (:cdn-url "\"http://cdn.tiye.me/fp-china-org/") (:title "\"中文函数式编程导航") (:icon "\"http://cdn.tiye.me/logo/mvc-works.png")
-      :proc $ quote ()
     |app.main $ {}
       :ns $ quote
         ns app.main $ :require
@@ -99,7 +101,6 @@
                   link $ {} (:rel "\"stylesheet") (:href "\"./entry/main.css")
                 body ({}) (comp-container)
             println "\"Wrote to index.html"
-      :proc $ quote ()
     |app.page $ {}
       :ns $ quote
         ns app.page
@@ -145,4 +146,3 @@
                 :scripts $ map ("#()" -> % :output-name prefix-cdn) assets
                 :ssr "\"respo-ssr"
                 :inline-styles $ [] (slurp "\"./entry/main.css")
-      :proc $ quote ()
