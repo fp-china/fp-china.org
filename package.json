@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "FP China page",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "bundle": "esbuild main.js --bundle --outfile=js-out/bundle.js --platform=node"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:fp-china/fp-china.org.git"
@@ -11,12 +13,11 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^2.4.1",
-    "webpack": "^5.44.0",
-    "webpack-cli": "^4.7.2"
+    "esbuild": "^0.13.13",
+    "vite": "^2.6.14"
   },
   "dependencies": {
-    "@calcit/procs": "^0.4.8",
+    "@calcit/procs": "^0.5.4",
     "shortid": "^2.2.16"
   }
 }
