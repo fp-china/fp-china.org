@@ -3,10 +3,13 @@
 ### Clojure
 
 * [中文论坛](http://clojure-china.org)
-* [英文 Slack](http://clojurians.net/)
 * 微信群(联系 `jiyinyiyong`)
 * QQ 群 130107204
-* [英文 Discord](https://discord.gg/X6yrEjc)
+* [英文 Discord](https://discord.gg/discljord)
+* [英文 Slack](http://clojurians.net/)
+* [英文 Zulip](https://clojurians.zulipchat.com/)
+* [英文 官方论坛](https://clojureverse.org/)
+* [资源列表](https://www.clojure-toolbox.com/)
 
 ### Haskell
 
