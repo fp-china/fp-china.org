@@ -196,6 +196,16 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.6.1.tgz#45785b5caf83200a34a9867ba50d69560880c120"
   integrity sha512-0zfTlFAIhgz8V2G8STq8toAjsYYA6eci1hnXuyOTUFnymrtJwnS6uGKiv3v5UrPZkBlamLvrLV2iiaeqCKzb0A==
 
+cirru-color@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/cirru-color/-/cirru-color-0.2.4.tgz#19c5cb33cbf45d5bcccf8ecf1e45ef5673962a7a"
+  integrity sha512-2ruNYgSyzrXirizCk2r9LNeu9+BXxEHNQVS1/RE2P7b1xoMjfYRiOpRaX2ecyCu4oF4HJGwYWi8vamiXI8ADEQ==
+
+copy-text-to-clipboard@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/copy-text-to-clipboard/-/copy-text-to-clipboard-3.2.0.tgz#0202b2d9bdae30a49a53f898626dcc3b49ad960b"
+  integrity sha512-RnJFp1XR/LOBDckxTib5Qjr/PMfkatD0MUCQgdpqS8MdKiNUzBjAQBEN6oUy+jW7LI93BBG3DtMB2KOOKpGs2Q==
+
 esbuild@^0.19.3:
   version "0.19.8"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.19.8.tgz#ad05b72281d84483fa6b5345bd246c27a207b8f1"
