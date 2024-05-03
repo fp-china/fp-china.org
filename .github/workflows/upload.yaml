@@ -12,22 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         node-version: 20
         cache: 'yarn'
 
-    - uses: supplypike/setup-bin@v3
+    - uses: calcit-lang/setup-cr@0.0.3
       with:
-        uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.14/cr'
-        name: 'cr'
-        version: '0.8.14'
-
-    - uses: supplypike/setup-bin@v3
-      with:
-        uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.14/caps'
-        name: 'caps'
-        version: '0.8.14'
+        version: "0.8.50"
 
     - run: caps --ci && mode=ci cr --emit-js -1 && yarn && mode=ci node ./main.mjs
 
