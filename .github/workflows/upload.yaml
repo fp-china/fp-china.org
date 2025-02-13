@@ -17,11 +17,9 @@ jobs:
         node-version: 20
         cache: 'yarn'
 
-    - uses: calcit-lang/setup-cr@0.0.3
-      with:
-        version: "0.8.50"
+    - uses: calcit-lang/setup-cr@0.0.8
 
-    - run: caps --ci && mode=ci cr --emit-js -1 && yarn && mode=ci node ./main.mjs
+    - run: caps --ci && mode=ci cr js -1 && yarn && mode=ci node ./main.mjs
 
     - run: yarn vite build --base=./
 

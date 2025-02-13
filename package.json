@@ -11,12 +11,12 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^5.4.12"
+    "vite": "^6.1.0"
   },
   "dependencies": {
-    "@calcit/procs": "^0.8.50",
+    "@calcit/procs": "^0.9.8",
     "cirru-color": "^0.2.4",
     "copy-text-to-clipboard": "^3.2.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.17"
   }
 }
