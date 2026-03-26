@@ -12,14 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
-        node-version: 20
-        cache: 'yarn'
+        node-version: 24
 
     - uses: calcit-lang/setup-cr@0.0.8
 
-    - run: caps --ci && mode=ci cr js -1 && yarn && mode=ci node ./main.mjs
+    - name: Enable Corepack
+      run: |
+        corepack enable
+        corepack prepare yarn@4.12.0 --activate
+        yarn --version
+
+    - name: Install deps
+      run: caps --ci && yarn install --immutable
+
+    - run: cr js && yarn build-html
 
     - run: yarn vite build --base=./
 
