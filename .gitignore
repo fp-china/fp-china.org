@@ -8,3 +8,6 @@ js-out/
 /index.html
 
 yarn-error.log
+.yarn/*.gz
+
+.DS_Store

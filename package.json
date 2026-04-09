@@ -1,9 +1,14 @@
 {
   "name": "fp-china",
   "version": "0.1.0",
+  "packageManager": "yarn@4.12.0",
   "description": "FP China page",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "compile": "cr js",
+    "build-html": "node ./script/prepare-dayjs-plugin.mjs && mode=ci node ./main.mjs",
+    "build": "yarn compile && yarn build-html && yarn vite build --base=./"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:fp-china/fp-china.org.git"
@@ -11,12 +16,13 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^6.4.2"
+    "vite": "^8.0.2"
   },
   "dependencies": {
-    "@calcit/procs": "^0.9.8",
+    "@calcit/procs": "0.12.13",
     "cirru-color": "^0.2.4",
     "copy-text-to-clipboard": "^3.2.0",
+    "dayjs": "^1.11.18",
     "shortid": "^2.2.17"
   }
 }
