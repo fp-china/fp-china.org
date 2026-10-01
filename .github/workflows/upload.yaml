@@ -8,14 +8,13 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: cos-${{ github.repository }}-${{ github.event_name == 'pull_request' && 'pr' || 'production' }}
-  cancel-in-progress: false
-  queue: max
-
 jobs:
   test:
     runs-on: ubuntu-24.04
+    outputs:
+      prefix: ${{ steps.asset-path.outputs.prefix }}
+      base-url: ${{ steps.asset-path.outputs.base-url }}
+      artifact-name: frontend-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
@@ -77,6 +76,28 @@ jobs:
         yarn build
         yarn test
 
+    - name: Save tested frontend artifact
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: frontend-${{ github.run_id }}-${{ github.run_attempt }}
+        path: dist
+        if-no-files-found: error
+        retention-days: 1
+
+  upload:
+    needs: test
+    runs-on: ubuntu-24.04
+    concurrency:
+      group: cos-${{ github.repository }}-${{ github.event_name == 'pull_request' && 'pr' || 'production' }}
+      cancel-in-progress: false
+      queue: max
+    steps:
+    - name: Download tested frontend artifact
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+      with:
+        name: ${{ needs.test.outputs.artifact-name }}
+        path: dist
+
     - name: Check COS credentials
       id: cos-credentials
       if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
@@ -103,8 +124,8 @@ jobs:
         source-dir: dist
         bucket: ${{ secrets.COS_BUCKET }}
         region: ap-shanghai
-        prefix: ${{ steps.asset-path.outputs.prefix }}
-        public-base-url: ${{ steps.asset-path.outputs.base-url }}
+        prefix: ${{ needs.test.outputs.prefix }}
+        public-base-url: ${{ needs.test.outputs.base-url }}
         secret-id: ${{ secrets.COS_SECRET_ID }}
         secret-key: ${{ secrets.COS_SECRET_KEY }}
 
