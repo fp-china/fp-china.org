@@ -82,7 +82,7 @@ jobs:
         name: frontend-${{ github.run_id }}-${{ github.run_attempt }}
         path: dist
         if-no-files-found: error
-        retention-days: 1
+        retention-days: 90
 
   upload:
     needs: test
