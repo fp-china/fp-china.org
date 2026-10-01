@@ -98,9 +98,31 @@ jobs:
         name: ${{ needs.test.outputs.artifact-name }}
         path: dist
 
+    - name: Reject superseded deployment
+      id: deploy-head
+      env:
+        GH_TOKEN: ${{ github.token }}
+        DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
+        DEPLOY_REPOSITORY: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name || github.repository }}
+        EXPECTED_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      run: |
+        set -euo pipefail
+        branch_path=$(jq -rn --arg branch "$DEPLOY_BRANCH" '$branch | @uri')
+        current_sha=$(curl --fail --silent --show-error \
+          -H "Authorization: Bearer $GH_TOKEN" \
+          -H "Accept: application/vnd.github+json" \
+          "$GITHUB_API_URL/repos/$DEPLOY_REPOSITORY/git/ref/heads/$branch_path" \
+          | jq -er '.object.sha')
+        if [[ "$current_sha" == "$EXPECTED_SHA" ]]; then
+          echo "current=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "current=false" >> "$GITHUB_OUTPUT"
+          echo "::notice::Skipping superseded frontend deployment; branch HEAD has changed."
+        fi
+
     - name: Check COS credentials
       id: cos-credentials
-      if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+      if: steps.deploy-head.outputs.current == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
       env:
         COS_BUCKET: ${{ secrets.COS_BUCKET }}
         COS_SECRET_ID: ${{ secrets.COS_SECRET_ID }}
@@ -118,7 +140,7 @@ jobs:
         fi
 
     - name: Upload and publicly verify frontend assets
-      if: steps.cos-credentials.outputs.available == 'true'
+      if: steps.deploy-head.outputs.current == 'true' && steps.cos-credentials.outputs.available == 'true'
       uses: worktools/cos-upload-action@17e6d213fe9f6772a6090a13c8ba044cd6cbcb09 # v1.1.1
       with:
         source-dir: dist
@@ -131,7 +153,7 @@ jobs:
 
     - name: Upload to server
       id: deploy
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: steps.deploy-head.outputs.current == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: Pendect/action-rsyncer@8e05ffa5c93e5d9c9b167796b26044d2c616b2b9 # v2.0.0
       env:
         DEPLOY_KEY: ${{secrets.rsync_private_key}}
@@ -143,5 +165,5 @@ jobs:
         dest: 'rsync-user@tiye.me:/web-assets/repo/${{ github.repository }}'
 
     - name: Display status from deploy
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: steps.deploy-head.outputs.current == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: echo "${{ steps.deploy.outputs.status }}"
