@@ -2,24 +2,24 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 10
   cacheKey: 10c0
 
-"@calcit/procs@npm:0.12.13":
-  version: 0.12.13
-  resolution: "@calcit/procs@npm:0.12.13"
+"@calcit/procs@npm:0.27.0":
+  version: 0.27.0
+  resolution: "@calcit/procs@npm:0.27.0"
   dependencies:
-    "@calcit/ternary-tree": "npm:0.0.25"
+    "@calcit/ternary-tree": "npm:0.0.26"
     "@cirru/parser.ts": "npm:^0.0.9"
-    "@cirru/writer.ts": "npm:^0.1.7"
-  checksum: 10c0/f88e063795c8bcf166e5fa9b0993edc1518b00cb1a02913e37c9f5af73508e97672f50fee4ce7633813690a5c037c7b0afd3b7dc67192517e5a16ff4d1bed1fe
+    "@cirru/writer.ts": "npm:^0.1.9"
+  checksum: 10c0/85edf1724beaf5e3b895f456b9d81ae93100316802b19bc20ab7cbcc61e295892e787c2f9cca0c9c231ba1cc3c3d320ae158d3f8c9fd39eda24500c56ebe99b1
   languageName: node
   linkType: hard
 
-"@calcit/ternary-tree@npm:0.0.25":
-  version: 0.0.25
-  resolution: "@calcit/ternary-tree@npm:0.0.25"
-  checksum: 10c0/49f01d526dec87810cc45f4e92dfa9043c07ecf64e03e2fa99c8ceca09724e8ec11308118599beffd62852f8594f8944f2c8101bc7e551ae64d421d27f91202b
+"@calcit/ternary-tree@npm:0.0.26":
+  version: 0.0.26
+  resolution: "@calcit/ternary-tree@npm:0.0.26"
+  checksum: 10c0/53fee664f72e25f3512f3a61c917fe7926e2620caab1fed68e030ee4ddf905be68b4249c2e644a4db7cadb96b23594059f73fa9c475af8a79526e8d145736563
   languageName: node
   linkType: hard
 
@@ -30,10 +30,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cirru/writer.ts@npm:^0.1.7":
-  version: 0.1.7
-  resolution: "@cirru/writer.ts@npm:0.1.7"
-  checksum: 10c0/3548f596abef52f8d4cfe95b25fc1ded0d059869eafb403e3e340c1bcdc50fe59af9fd75f1b6d9f828129c847965f378945ed370ff9aeec9ddcc89172afad92a
+"@cirru/writer.ts@npm:^0.1.9":
+  version: 0.1.9
+  resolution: "@cirru/writer.ts@npm:0.1.9"
+  checksum: 10c0/df2672837d1bf61ee1a83b8b77ea17b9c241cb8135323567992749ee26daf3abccf43ab75d8698d67c36c8b8469f9a66c235a809a60484d71133592a9161a054
   languageName: node
   linkType: hard
 
@@ -379,7 +379,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-china@workspace:."
   dependencies:
-    "@calcit/procs": "npm:0.12.13"
+    "@calcit/procs": "npm:0.27.0"
     cirru-color: "npm:^0.2.4"
     copy-text-to-clipboard: "npm:^3.2.0"
     dayjs: "npm:^1.11.18"

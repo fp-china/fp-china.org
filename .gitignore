@@ -11,3 +11,5 @@ yarn-error.log
 .yarn/*.gz
 
 .DS_Store
+compact.cirru
+package.cirru
