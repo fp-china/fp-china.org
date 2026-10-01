@@ -108,11 +108,23 @@ jobs:
       run: |
         set -euo pipefail
         branch_path=$(jq -rn --arg branch "$DEPLOY_BRANCH" '$branch | @uri')
-        current_sha=$(curl --fail --silent --show-error \
+        response=$(curl --silent --show-error \
           -H "Authorization: Bearer $GH_TOKEN" \
           -H "Accept: application/vnd.github+json" \
-          "$GITHUB_API_URL/repos/$DEPLOY_REPOSITORY/git/ref/heads/$branch_path" \
-          | jq -er '.object.sha')
+          --write-out '\n%{http_code}' \
+          "$GITHUB_API_URL/repos/$DEPLOY_REPOSITORY/git/ref/heads/$branch_path")
+        http_code="${response##*$'\n'}"
+        response_body="${response%$'\n'*}"
+        if [[ "$http_code" == "404" ]]; then
+          echo "current=false" >> "$GITHUB_OUTPUT"
+          echo "::notice::Skipping frontend deployment; branch no longer exists."
+          exit 0
+        fi
+        if [[ "$http_code" != "200" ]]; then
+          echo "::error::Cannot verify deployment branch HEAD (HTTP $http_code)."
+          exit 1
+        fi
+        current_sha=$(printf '%s' "$response_body" | jq -er '.object.sha')
         if [[ "$current_sha" == "$EXPECTED_SHA" ]]; then
           echo "current=true" >> "$GITHUB_OUTPUT"
         else
