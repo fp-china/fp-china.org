@@ -29,7 +29,7 @@ or `package.cirru`.
 caps --ci
 yarn install --immutable
 caps verify --toolchain
-calcit calcit.cirru --check-only
+calcit calcit.cirru --strict-types --warn-dyn-method --check-only
 yarn build
 yarn test
 ```
@@ -39,8 +39,9 @@ four Markdown files at compilation time and generates `index.html`; Vite
 builds that HTML and its stylesheet without shipping a browser JS bundle.
 
 `VITE_BASE_URL` selects the frontend asset base (default `./`). CI uses
-`https://cos-sh.tiye.me/fp-china/fp-china.org/`, with `/pr/` for PR previews.
-COS uploads only `dist/`; cos-upload-action v1.1.1 performs public upload
+`https://cos-sh.tiye.me/fp-china/fp-china.org/`, with
+`/pr/<number>/<run-id>/<attempt>/` for isolated PR previews.
+COS uploads only `dist/`; cos-upload-action v1.2.0 performs public upload
 verification internally. Configure `COS_BUCKET`, `COS_SECRET_ID`, and
 `COS_SECRET_KEY` in repository secrets. PRs without credentials still test
 the build but do not prove that upload verification passed.
@@ -49,3 +50,11 @@ The production rsync source remains `dist/*` and its destination remains
 `rsync-user@tiye.me:/web-assets/repo/fp-china/fp-china.org`. It runs only on
 main pushes, never for PRs. Markdown source, existing external links, and
 shared asset URLs are unchanged.
+
+The normal CI uses strict entry/public checks and the existing SSR tests, not
+a compiler fix workflow. Uploads queue without cancellation, separately for
+each PR and production. The single production HEAD check skips superseded
+commits before reading credentials or deploying; API failures stop the job.
+
+Calcit 0.28 migration is still pending compatible shared module releases. This
+deployment change does not update Calcit, module tags, or existing tests.

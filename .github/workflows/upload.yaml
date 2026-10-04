@@ -35,6 +35,7 @@ jobs:
       with:
         tools: calcit,caps
         caps-version: "0.1.1"
+        version: "0.27.0"
 
     - name: Resolve and verify toolchain
       run: |
@@ -53,17 +54,18 @@ jobs:
         test ! -e package.cirru
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
-        calcit calcit.cirru fix --workflow strict --verify
-        calcit calcit.cirru --check-only
+        calcit calcit.cirru --strict-types --warn-dyn-method --check-only
         calcit calcit.cirru analyze check-public --ns app.comp.container --ns app.config --ns app.main --summary-only
 
     - name: Select frontend CDN path
       id: asset-path
+      env:
+        PR_NUMBER: ${{ github.event.pull_request.number }}
       run: |
         set -euo pipefail
         asset_prefix="${GITHUB_REPOSITORY}/"
         if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-          asset_prefix="${GITHUB_REPOSITORY}/pr/"
+          asset_prefix="${GITHUB_REPOSITORY}/pr/${PR_NUMBER}/${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}/"
         fi
         base_url="https://cos-sh.tiye.me/${asset_prefix}"
         echo "VITE_BASE_URL=${base_url}" >> "$GITHUB_ENV"
@@ -88,7 +90,7 @@ jobs:
     needs: test
     runs-on: ubuntu-24.04
     concurrency:
-      group: cos-${{ github.repository }}-${{ github.event_name == 'pull_request' && 'pr' || 'production' }}
+      group: cos-${{ github.repository }}-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'production' }}
       cancel-in-progress: false
       queue: max
     steps:
@@ -100,32 +102,14 @@ jobs:
 
     - name: Reject superseded deployment
       id: deploy-head
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       env:
         GH_TOKEN: ${{ github.token }}
-        DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
-        DEPLOY_REPOSITORY: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name || github.repository }}
-        EXPECTED_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
       run: |
         set -euo pipefail
-        branch_path=$(jq -rn --arg branch "$DEPLOY_BRANCH" '$branch | @uri')
-        response=$(curl --silent --show-error \
-          -H "Authorization: Bearer $GH_TOKEN" \
-          -H "Accept: application/vnd.github+json" \
-          --write-out '\n%{http_code}' \
-          "$GITHUB_API_URL/repos/$DEPLOY_REPOSITORY/git/ref/heads/$branch_path")
-        http_code="${response##*$'\n'}"
-        response_body="${response%$'\n'*}"
-        if [[ "$http_code" == "404" ]]; then
-          echo "current=false" >> "$GITHUB_OUTPUT"
-          echo "::notice::Skipping frontend deployment; branch no longer exists."
-          exit 0
-        fi
-        if [[ "$http_code" != "200" ]]; then
-          echo "::error::Cannot verify deployment branch HEAD (HTTP $http_code)."
-          exit 1
-        fi
-        current_sha=$(printf '%s' "$response_body" | jq -er '.object.sha')
-        if [[ "$current_sha" == "$EXPECTED_SHA" ]]; then
+        current_sha=$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq '.object.sha // empty')
+        test -n "$current_sha"
+        if [[ "$current_sha" == "$GITHUB_SHA" ]]; then
           echo "current=true" >> "$GITHUB_OUTPUT"
         else
           echo "current=false" >> "$GITHUB_OUTPUT"
@@ -134,7 +118,7 @@ jobs:
 
     - name: Check COS credentials
       id: cos-credentials
-      if: steps.deploy-head.outputs.current == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+      if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || steps.deploy-head.outputs.current == 'true'
       env:
         COS_BUCKET: ${{ secrets.COS_BUCKET }}
         COS_SECRET_ID: ${{ secrets.COS_SECRET_ID }}
@@ -152,8 +136,8 @@ jobs:
         fi
 
     - name: Upload and publicly verify frontend assets
-      if: steps.deploy-head.outputs.current == 'true' && steps.cos-credentials.outputs.available == 'true'
-      uses: worktools/cos-upload-action@17e6d213fe9f6772a6090a13c8ba044cd6cbcb09 # v1.1.1
+      if: steps.cos-credentials.outputs.available == 'true'
+      uses: worktools/cos-upload-action@06d6027dcca6413c5936e04a9b6e9f0d5ef71ba0 # v1.2.0
       with:
         source-dir: dist
         bucket: ${{ secrets.COS_BUCKET }}
