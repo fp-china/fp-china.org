@@ -35,27 +35,27 @@ jobs:
       with:
         tools: calcit,caps
         caps-version: "0.1.1"
-        version: "0.27.0"
+        deps-file: deps.cirru
 
     - name: Resolve and verify toolchain
       run: |
         set -euo pipefail
-        caps --ci
+        caps --strict --ci
         yarn install --immutable
         caps verify --toolchain
 
     - name: Check canonical Calcit snapshot
       run: |
         set -euo pipefail
-        test "$(calcit --version)" = "0.27.0"
         test -f calcit.cirru
         test -f deps.cirru
         test ! -e compact.cirru
         test ! -e package.cirru
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
-        calcit calcit.cirru --strict-types --warn-dyn-method --check-only
-        calcit calcit.cirru analyze check-public --ns app.comp.container --ns app.config --ns app.main --summary-only
+        calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
+        calcit calcit.cirru --check-only --ns app.comp.container --ns app.config --ns app.main --summary-only --format json
+        calcit calcit.cirru fix --workflow strict --verify --format edn
 
     - name: Select frontend CDN path
       id: asset-path
