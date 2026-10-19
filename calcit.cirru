@@ -129,7 +129,7 @@
                 create-element :meta $ {} $ :charset |utf8
                 title $ {} $ :inner-text "|函数式编程中文社区"
                 link $ {} (:rel |stylesheet) (:href |./entry/main.css)
-                style $ {} $ :innerHTML (join-str @*style-list-in-nodejs |)
+                style $ {} $ :innerHTML (join-string @*style-list-in-nodejs |)
               body ({}) (comp-container)
             println "|Wrote to index.html"
           :examples $ []
