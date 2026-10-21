@@ -19,11 +19,18 @@ http://fp-china.org
 
 https://github.com/calcit-lang/respo-calcit-workflow
 
+### 使用者影响：正式 Calcit 0.30.1 与 Markdown 图
+
+CLI/procs一起升级到正式 **0.30.1**，使用已发布Markdown0.4.59、Respo0.16.124、
+UI0.8.0及传递JS-FFI0.2.5、Router0.8.37。请重新安装完整图并重建，不混用旧alpha缓存。
+UI升级可能有样式差异，不承诺逐像素相同；Snapshot与四份Markdown内容本次不改动。
+站点仍是纯静态 SSR；四份 Markdown、外部链接、共享资源及部署路径不变。
+CI保留all-defs、完整strict与原七项SSR测试，只删除重复namespace清单，
+不添加脚本、concurrently、预算或强转。本轮不合并/部署生产、不发布站点tag/npm。
+正式图验收以本PR结果为准，前一轮alpha.5结果不作为新证明。
+
 ### Development and deployment
 
-本轮验收使用配对的 Calcit / procs 0.30.1-alpha.5、正式 Respo 0.16.122、
-Respo UI 0.7.41 和 Markdown 0.4.57，不代表正式 0.30.1 二进制验收。
-站点仍是纯静态 SSR；四份 Markdown、外部链接、共享资源及部署路径不变。
 Use Node.js 24 and Yarn 4.18.0. Only `calcit.cirru` and
 `deps.cirru` are source snapshots/manifests; do not recreate `compact.cirru`
 or `package.cirru`.
@@ -59,7 +66,7 @@ shared asset URLs are unchanged.
 CI 独立执行 strict Caps 解析。唯一程序 API 迁移是已退役的 `join-str` 改为 `join-string`，
 保持 CSS 收集与 HTML 写出顺序，不新增强转或校验脚本，不改动既有七项 SSR 断言。
 
-The normal CI uses all-definition/public checks, full strict workflow verification
+The normal CI uses all-definition checks, full strict workflow verification
 and the existing SSR tests. Uploads queue without cancellation, separately for
 each PR and production. The single production HEAD check skips superseded
 commits before reading credentials or deploying; API failures stop the job.

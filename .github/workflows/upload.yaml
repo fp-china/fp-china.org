@@ -54,7 +54,6 @@ jobs:
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
-        calcit calcit.cirru --check-only --ns app.comp.container --ns app.config --ns app.main --summary-only --format json
         calcit calcit.cirru fix --workflow strict --verify --format edn
 
     - name: Select frontend CDN path
