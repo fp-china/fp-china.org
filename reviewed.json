@@ -1,0 +1,1085 @@
+{
+  "config": {
+    "schema_version": 1,
+    "command": "config.show",
+    "data": {
+      "package": "app",
+      "version": "0.1.0",
+      "selected_entry": null,
+      "entries": [
+        {
+          "name": "default",
+          "mode": "js",
+          "target": "node",
+          "init_fn": "app.main/main!",
+          "reload_fn": "app.main/main!",
+          "description": "Generate the static FP China HTML page in Node.js",
+          "modules": [
+            "respo.calcit/",
+            "respo-ui.calcit/",
+            "respo-markdown.calcit/"
+          ],
+          "type_slots": {},
+          "feature_policy": {}
+        }
+      ],
+      "verification_schema_version": 1,
+      "verification_profiles": []
+    },
+    "diagnostics": [],
+    "revision": "md5:866870d5be9940e138aa668f708e9edf"
+  },
+  "ns": {
+    "command": "query.ns",
+    "data": {
+      "count": 4,
+      "include_dependencies": false,
+      "namespaces": [
+        "app.$meta",
+        "app.comp.container",
+        "app.config",
+        "app.main"
+      ]
+    },
+    "schema_version": 1
+  },
+  "namespaces": [
+    {
+      "command": "query.ns",
+      "data": {
+        "definition_count": 2,
+        "doc": "",
+        "namespace": "app.$meta",
+        "ns_code": [
+          "ns",
+          "app.$meta"
+        ]
+      },
+      "schema_version": 1
+    },
+    {
+      "command": "query.ns",
+      "data": {
+        "definition_count": 5,
+        "doc": "",
+        "namespace": "app.comp.container",
+        "ns_code": [
+          "ns",
+          "app.comp.container",
+          [
+            ":require",
+            [
+              "respo.util.format",
+              ":refer",
+              [
+                "hsl"
+              ]
+            ],
+            [
+              "respo-ui.core",
+              ":as",
+              "ui"
+            ],
+            [
+              "respo.core",
+              ":refer",
+              [
+                "defcomp",
+                "<>",
+                "div",
+                "a"
+              ]
+            ],
+            [
+              "respo.comp.space",
+              ":refer",
+              [
+                "=<"
+              ]
+            ],
+            [
+              "respo-md.comp.md",
+              ":refer",
+              [
+                "comp-md-block"
+              ]
+            ]
+          ]
+        ]
+      },
+      "schema_version": 1
+    },
+    {
+      "command": "query.ns",
+      "data": {
+        "definition_count": 2,
+        "doc": "",
+        "namespace": "app.config",
+        "ns_code": [
+          "ns",
+          "app.config"
+        ]
+      },
+      "schema_version": 1
+    },
+    {
+      "command": "query.ns",
+      "data": {
+        "definition_count": 3,
+        "doc": "",
+        "namespace": "app.main",
+        "ns_code": [
+          "ns",
+          "app.main",
+          [
+            ":require",
+            [
+              "respo.core",
+              ":refer",
+              [
+                "html",
+                "head",
+                "body",
+                "link",
+                "title",
+                "create-element",
+                "style"
+              ]
+            ],
+            [
+              "respo.css",
+              ":refer",
+              [
+                "*style-list-in-nodejs"
+              ]
+            ],
+            [
+              "respo.render.html",
+              ":refer",
+              [
+                "make-string"
+              ]
+            ],
+            [
+              "app.comp.container",
+              ":refer",
+              [
+                "comp-container"
+              ]
+            ],
+            [
+              "app.config",
+              ":as",
+              "config"
+            ],
+            [
+              "|node:fs",
+              ":as",
+              "fs"
+            ]
+          ]
+        ]
+      },
+      "schema_version": 1
+    }
+  ],
+  "definitions": [
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "def",
+          "calcit-dirname",
+          "|"
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.$meta/calcit-dirname",
+        "js_ffi": null,
+        "schema": null,
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:b9c073ddc99189680e33ec22dc7f5689",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "def",
+          "calcit-filename",
+          "|calcit.cirru"
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.$meta/calcit-filename",
+        "js_ffi": null,
+        "schema": null,
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:a2706c65c80308f07d99e2a9ab5bd02b",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defcomp",
+          "comp-container",
+          [],
+          [
+            "div",
+            [
+              "{}",
+              [
+                ":style",
+                [
+                  "merge",
+                  "ui/global"
+                ]
+              ]
+            ],
+            [
+              "comp-header"
+            ],
+            [
+              "comp-content"
+            ],
+            [
+              "comp-footer"
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.comp.container/comp-container",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'respo.schema/Component"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:9dec53e58e36f23bf8e9856cd8eed3bf",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defcomp",
+          "comp-content",
+          [],
+          [
+            "div",
+            [
+              "{}",
+              [
+                ":style",
+                [
+                  "{}",
+                  [
+                    ":background-color",
+                    ":white"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "div",
+              [
+                "{}",
+                [
+                  ":style",
+                  [
+                    "{}",
+                    [
+                      ":padding",
+                      "16"
+                    ],
+                    [
+                      ":max-width",
+                      "600"
+                    ],
+                    [
+                      ":margin",
+                      ":auto"
+                    ],
+                    [
+                      ":font-size",
+                      "16"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "comp-md-block",
+                [
+                  "inline",
+                  "|events.md"
+                ],
+                [
+                  "{}",
+                  [
+                    ":style",
+                    [
+                      "{}"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "=<",
+                "nil",
+                "40"
+              ],
+              [
+                "comp-md-block",
+                [
+                  "inline",
+                  "|langs.md"
+                ],
+                [
+                  "{}",
+                  [
+                    ":style",
+                    [
+                      "{}"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "=<",
+                "nil",
+                "40"
+              ],
+              [
+                "comp-md-block",
+                [
+                  "inline",
+                  "|videos.md"
+                ],
+                [
+                  "{}",
+                  [
+                    ":style",
+                    [
+                      "{}"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "=<",
+                "nil",
+                "40"
+              ],
+              [
+                "comp-md-block",
+                [
+                  "inline",
+                  "|sites.md"
+                ],
+                [
+                  "{}",
+                  [
+                    ":style",
+                    [
+                      "{}"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.comp.container/comp-content",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'respo.schema/Component"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:de2e94146ef97188acecb17e239eabbd",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defcomp",
+          "comp-footer",
+          [],
+          [
+            "div",
+            [
+              "{}",
+              [
+                ":style",
+                [
+                  "{}",
+                  [
+                    ":background-color",
+                    "|rgb(102,102,102)"
+                  ],
+                  [
+                    ":padding",
+                    "|32px 16px"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "div",
+              [
+                "{}",
+                [
+                  ":style",
+                  [
+                    "{}",
+                    [
+                      ":max-width",
+                      "600"
+                    ],
+                    [
+                      ":margin",
+                      ":auto"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "a",
+                [
+                  "{}",
+                  [
+                    ":href",
+                    "|https://github.com/fp-china/fp-china.org"
+                  ],
+                  [
+                    ":target",
+                    "|_blank"
+                  ],
+                  [
+                    ":inner-text",
+                    "|Site on GitHub"
+                  ],
+                  [
+                    ":style",
+                    [
+                      "{}",
+                      [
+                        ":text-decoration",
+                        ":none"
+                      ],
+                      [
+                        ":color",
+                        [
+                          "hsl",
+                          "240",
+                          "80",
+                          "90"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.comp.container/comp-footer",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'respo.schema/Component"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:301d58116ca4a68367e35d0335a630d4",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defcomp",
+          "comp-header",
+          [],
+          [
+            "div",
+            [
+              "{}",
+              [
+                ":style",
+                [
+                  "{}",
+                  [
+                    ":padding",
+                    "|32px 16px"
+                  ],
+                  [
+                    ":background-color",
+                    "|rgb(102,102,102)"
+                  ],
+                  [
+                    ":color",
+                    ":white"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "div",
+              [
+                "{}",
+                [
+                  ":style",
+                  [
+                    "merge",
+                    "ui/row-middle",
+                    [
+                      "{}",
+                      [
+                        ":max-width",
+                        "600"
+                      ],
+                      [
+                        ":margin",
+                        ":auto"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "<>",
+                "|函数式编程中文社区",
+                [
+                  "{}",
+                  [
+                    ":font-size",
+                    "24"
+                  ]
+                ]
+              ],
+              [
+                "=<",
+                "16",
+                "nil"
+              ],
+              [
+                "a",
+                [
+                  "{}",
+                  [
+                    ":style",
+                    [
+                      "{}",
+                      [
+                        ":color",
+                        [
+                          "hsl",
+                          "200",
+                          "70",
+                          "90"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    ":inner-text",
+                    "|讨论组"
+                  ],
+                  [
+                    ":href",
+                    "|https://github.com/fp-china/fp-china.org/discussions"
+                  ],
+                  [
+                    ":target",
+                    "|_blank"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.comp.container/comp-header",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'respo.schema/Component"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:ae7585ea02faaa309753e83f3351acf7",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defmacro",
+          "inline",
+          [
+            "path"
+          ],
+          [
+            "read-file",
+            [
+              "str",
+              "|content/",
+              "path"
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.comp.container/inline",
+        "js_ffi": null,
+        "schema": [
+          "::",
+          "'Macro",
+          [
+            "{}",
+            [
+              ":capabilities",
+              [
+                "#{}",
+                ":fs-read"
+              ]
+            ],
+            [
+              ":expansion",
+              [
+                "::",
+                "'Expr",
+                "'String"
+              ]
+            ],
+            [
+              ":required",
+              [
+                "[]",
+                "'Syntax"
+              ]
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:6d189ec5db0d49cd0342dd28ef06b0ea",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "def",
+          "dev?",
+          [
+            "=",
+            "|dev",
+            [
+              [
+                "get-env",
+                "|mode"
+              ],
+              ".unwrap-or",
+              "|release"
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.config/dev?",
+        "js_ffi": null,
+        "schema": "'Bool",
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:34dae6d440d7fc25c99d0fa7e31f904b",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "def",
+          "site",
+          [
+            "{}",
+            [
+              ":storage",
+              "|fp-china"
+            ],
+            [
+              ":dev-ui",
+              "|http://localhost:8100/main.css"
+            ],
+            [
+              ":release-ui",
+              "|http://cdn.tiye.me/favored-fonts/main.css"
+            ],
+            [
+              ":cdn-url",
+              "|https://cos-sh.tiye.me/fp-china/fp-china.org/"
+            ],
+            [
+              ":title",
+              "|中文函数式编程导航"
+            ],
+            [
+              ":icon",
+              "|http://cdn.tiye.me/logo/mvc-works.png"
+            ]
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.config/site",
+        "js_ffi": null,
+        "schema": [
+          "::",
+          "'Map",
+          "'Tag",
+          "'String"
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:3ee002216a48f99c7b222059a7401853",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defn",
+          "main!",
+          [],
+          [
+            "println",
+            "|Running mode:",
+            [
+              "if",
+              "config/dev?",
+              "|dev",
+              "|release"
+            ]
+          ],
+          [
+            "write-html!"
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.main/main!",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'Unit"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ],
+          [
+            ":features",
+            [
+              "#{}",
+              ":js-ffi"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:42a1e0a3b1f1e15396b19de2c52e0389",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defn",
+          "reload!",
+          [],
+          [
+            "write-html!"
+          ],
+          [
+            "println",
+            "|Code updated."
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.main/reload!",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'Unit"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ],
+          [
+            ":features",
+            [
+              "#{}",
+              ":js-ffi"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:91eb2f102e61ee7986ccb785ad9112ad",
+      "schema_version": 1
+    },
+    {
+      "command": "query.def",
+      "data": {
+        "code": [
+          "defn",
+          "write-html!",
+          [],
+          [
+            "fs/writeFileSync",
+            "|index.html",
+            [
+              "make-string",
+              [
+                "html",
+                [
+                  "{}"
+                ],
+                [
+                  "head",
+                  [
+                    "{}"
+                  ],
+                  [
+                    "create-element",
+                    ":meta",
+                    [
+                      "{}",
+                      [
+                        ":charset",
+                        "|utf8"
+                      ]
+                    ]
+                  ],
+                  [
+                    "title",
+                    [
+                      "{}",
+                      [
+                        ":inner-text",
+                        "|函数式编程中文社区"
+                      ]
+                    ]
+                  ],
+                  [
+                    "link",
+                    [
+                      "{}",
+                      [
+                        ":rel",
+                        "|stylesheet"
+                      ],
+                      [
+                        ":href",
+                        "|./entry/main.css"
+                      ]
+                    ]
+                  ],
+                  [
+                    "style",
+                    [
+                      "{}",
+                      [
+                        ":innerHTML",
+                        [
+                          "join-string",
+                          "@*style-list-in-nodejs",
+                          "|"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "body",
+                  [
+                    "{}"
+                  ],
+                  [
+                    "comp-container"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "println",
+            "|Wrote to index.html"
+          ]
+        ],
+        "doc": "",
+        "examples": [],
+        "ffi": null,
+        "ffi_edn": null,
+        "id": "app.main/write-html!",
+        "js_ffi": null,
+        "schema": [
+          "{}",
+          [
+            ":kind",
+            ":fn"
+          ],
+          [
+            ":return",
+            "'Unit"
+          ],
+          [
+            ":args",
+            [
+              "[]"
+            ]
+          ],
+          [
+            ":features",
+            [
+              "#{}",
+              ":js-ffi"
+            ]
+          ]
+        ],
+        "tags": [],
+        "tests": []
+      },
+      "diagnostics": [],
+      "revision": "md5:d350e2b9ac44d70677e43f2661c85451",
+      "schema_version": 1
+    }
+  ]
+}
