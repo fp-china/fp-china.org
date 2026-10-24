@@ -21,9 +21,11 @@ https://github.com/calcit-lang/respo-calcit-workflow
 
 ### 使用者影响：正式 Calcit 0.30.1 与 Markdown 图
 
-CLI/procs一起升级到正式 **0.30.1**，使用已发布Markdown0.4.59、Respo0.16.124、
-UI0.8.0及传递JS-FFI0.2.5、Router0.8.37。请重新安装完整图并重建，不混用旧alpha缓存。
-UI升级可能有样式差异，不承诺逐像素相同；Snapshot与四份Markdown内容本次不改动。
+CLI/procs保持正式 **0.30.1**，使用已发布Markdown0.4.60、Respo0.16.126、
+UI0.8.1及传递JS-FFI0.2.6、Router0.8.38，Vite 固定8.3.3。请重新安装完整图并重建，不混用旧alpha缓存。
+UI升级可能有样式差异，不承诺逐像素相同；四份Markdown内容不改动。
+本轮迁移一处 Map merge 为方法，去掉一处单参数恒等包装，静态 CSS 值改为等价 String；
+全部公开 schema、写出顺序与原七项 SSR 测试保持。原站点不含浏览器 JS/HUD，不凭空添加。
 站点仍是纯静态 SSR；四份 Markdown、外部链接、共享资源及部署路径不变。
 CI保留all-defs、完整strict与原七项SSR测试，只删除重复namespace清单，
 不添加脚本、concurrently、预算或强转。本轮不合并/部署生产、不发布站点tag/npm。
@@ -63,7 +65,7 @@ main pushes, never for PRs. Markdown source, existing external links, and
 shared asset URLs are unchanged.
 
 本次本地验收未运行 Caps；开发者仍须执行上述安装步骤以生成模块链接，
-CI 独立执行 strict Caps 解析。唯一程序 API 迁移是已退役的 `join-str` 改为 `join-string`，
+CI 独立执行 strict Caps 解析。此前程序 API 迁移将已退役的 `join-str` 改为 `join-string`，
 保持 CSS 收集与 HTML 写出顺序，不新增强转或校验脚本，不改动既有七项 SSR 断言。
 
 The normal CI uses all-definition checks, full strict workflow verification
