@@ -18,7 +18,7 @@
         'comp-container $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-container ()
             div
-              {} $ :style $ merge ui/global
+              {} $ :style ui/global
               comp-header
               comp-content
               comp-footer
@@ -28,9 +28,9 @@
         'comp-content $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-content ()
             div
-              {} $ :style $ {} (:background-color :white)
+              {} $ :style $ {} (:background-color |white)
               div
-                {} $ :style $ {} (:padding 16) (:max-width 600) (:margin :auto) (:font-size 16)
+                {} $ :style $ {} (:padding |16px) (:max-width |600px) (:margin |auto) (:font-size |16px)
                 comp-md-block (inline |events.md)
                   {} $ :style $ {}
                 =< nil 40
@@ -50,9 +50,9 @@
             div
               {} $ :style $ {} (:background-color "|rgb(102,102,102)") (:padding "|32px 16px")
               div
-                {} $ :style $ {} (:max-width 600) (:margin :auto)
+                {} $ :style $ {} (:max-width |600px) (:margin |auto)
                 a $ {} (:href |https://github.com/fp-china/fp-china.org) (:target |_blank) (:inner-text "|Site on GitHub")
-                  :style $ {} (:text-decoration :none)
+                  :style $ {} (:text-decoration |none)
                     :color $ hsl 240 80 90
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'respo.schema/Component)
@@ -60,11 +60,11 @@
         'comp-header $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-header ()
             div
-              {} $ :style $ {} (:padding "|32px 16px") (:background-color "|rgb(102,102,102)") (:color :white)
+              {} $ :style $ {} (:padding "|32px 16px") (:background-color "|rgb(102,102,102)") (:color |white)
               div
-                {} $ :style $ merge ui/row-middle
-                  {} (:max-width 600) (:margin :auto)
-                <> "|函数式编程中文社区" $ {} $ :font-size 24
+                {} $ :style $ .merge ui/row-middle
+                  {} (:max-width |600px) (:margin |auto)
+                <> "|函数式编程中文社区" $ {} $ :font-size |24px
                 =< 16 nil
                 a $ {}
                   :style $ {} $ :color (hsl 200 70 90)
