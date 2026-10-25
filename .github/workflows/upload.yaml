@@ -43,6 +43,7 @@ jobs:
         caps --strict --ci
         yarn install --immutable
         caps verify --toolchain
+        git diff --quiet -- deps.cirru package.json yarn.lock .yarnrc.yml
 
     - name: Check canonical Calcit snapshot
       run: |
@@ -52,9 +53,9 @@ jobs:
         test ! -e compact.cirru
         test ! -e package.cirru
         calcit calcit.cirru edit format
-        git diff --exit-code -- calcit.cirru
+        git diff --quiet -- calcit.cirru
         calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
-        calcit calcit.cirru fix --workflow strict --verify --format edn
+        calcit calcit.cirru fix --workflow strict --verify --format json | jq -e '.data.workflow.status == "passed" and .diagnostics == []'
 
     - name: Select frontend CDN path
       id: asset-path
