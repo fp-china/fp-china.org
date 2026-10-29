@@ -16,11 +16,11 @@ jobs:
       base-url: ${{ steps.asset-path.outputs.base-url }}
       artifact-name: frontend-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: actions/checkout@v7.0.1
       with:
         persist-credentials: false
 
-    - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+    - uses: actions/setup-node@v6.5.0
       with:
         node-version: 24
         package-manager-cache: false
@@ -31,7 +31,7 @@ jobs:
         corepack prepare yarn@4.18.0 --activate
         yarn --version
 
-    - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5.0
+    - uses: calcit-lang/setup-calcit@v1.5.0
       with:
         tools: calcit,caps
         caps-version: "0.1.1"
@@ -54,7 +54,7 @@ jobs:
         test ! -e package.cirru
         calcit calcit.cirru edit format
         git diff --quiet -- calcit.cirru
-        calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
+        calcit calcit.cirru --warn-dyn-method --check-only --all-defs
         calcit calcit.cirru fix --workflow strict --verify --format json | jq -e '.data.workflow.status == "passed" and .diagnostics == []'
 
     - name: Select frontend CDN path
@@ -79,7 +79,7 @@ jobs:
         yarn test
 
     - name: Save tested frontend artifact
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      uses: actions/upload-artifact@v7.0.1
       with:
         name: frontend-${{ github.run_id }}-${{ github.run_attempt }}
         path: dist
@@ -95,7 +95,7 @@ jobs:
       queue: max
     steps:
     - name: Download tested frontend artifact
-      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+      uses: actions/download-artifact@v8.0.1
       with:
         name: ${{ needs.test.outputs.artifact-name }}
         path: dist
@@ -137,7 +137,7 @@ jobs:
 
     - name: Upload and publicly verify frontend assets
       if: steps.cos-credentials.outputs.available == 'true'
-      uses: worktools/cos-upload-action@06d6027dcca6413c5936e04a9b6e9f0d5ef71ba0 # v1.2.0
+      uses: worktools/cos-upload-action@v1.2.0
       with:
         source-dir: dist
         bucket: ${{ secrets.COS_BUCKET }}
@@ -150,7 +150,7 @@ jobs:
     - name: Upload to server
       id: deploy
       if: steps.deploy-head.outputs.current == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: Pendect/action-rsyncer@8e05ffa5c93e5d9c9b167796b26044d2c616b2b9 # v2.0.0
+      uses: Pendect/action-rsyncer@v2.0.0
       env:
         DEPLOY_KEY: ${{secrets.rsync_private_key}}
       with:

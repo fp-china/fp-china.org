@@ -23,8 +23,7 @@
               comp-content
               comp-footer
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'respo.schema/Component)
-            :args $ []
+          :schema $ quote $ Fn (-> respo.schema/Component)
         'comp-content $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-content ()
             div
@@ -43,8 +42,7 @@
                 comp-md-block (inline |sites.md)
                   {} $ :style $ {}
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'respo.schema/Component)
-            :args $ []
+          :schema $ quote $ Fn (-> respo.schema/Component)
         'comp-footer $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-footer ()
             div
@@ -55,8 +53,7 @@
                   :style $ {} (:text-decoration |none)
                     :color $ hsl 240 80 90
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'respo.schema/Component)
-            :args $ []
+          :schema $ quote $ Fn (-> respo.schema/Component)
         'comp-header $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-header ()
             div
@@ -72,16 +69,14 @@
                   :href |https://github.com/fp-china/fp-china.org/discussions
                   :target |_blank
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'respo.schema/Component)
-            :args $ []
+          :schema $ quote $ Fn (-> respo.schema/Component)
         'inline $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defmacro inline (path)
             read-file $ str |content/ path
           :examples $ []
-          :schema $ :: 'Macro $ {}
-            :capabilities $ #{} :fs-read
-            :expansion $ :: 'Expr 'String
-            :required $ [] 'Syntax
+          :schema $ quote $ Macro Syntax
+            -> $ Expr String
+            :capabilities :fs-read
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns app.comp.container
           :require
@@ -98,12 +93,12 @@
               get-env |mode
               , .unwrap-or |release
           :examples $ []
-          :schema $ :: 'Bool
+          :schema $ quote Bool
         'site $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def site
             {} (:storage |fp-china) (:dev-ui |http://localhost:8100/main.css) (:release-ui |http://cdn.tiye.me/favored-fonts/main.css) (:cdn-url |https://cos-sh.tiye.me/fp-china/fp-china.org/) (:title "|中文函数式编程导航") (:icon |http://cdn.tiye.me/logo/mvc-works.png)
           :examples $ []
-          :schema $ :: 'Map 'Tag 'String
+          :schema $ quote $ Map Tag String
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns app.config
     'app.main $ %{} 'FileEntry
@@ -113,15 +108,11 @@
             println "|Running mode:" $ if config/dev? |dev |release
             write-html!
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
-            :features $ #{} :js-ffi
+          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (write-html!) (println "|Code updated.")
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
-            :features $ #{} :js-ffi
+          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
         'write-html! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn write-html! ()
             fs/writeFileSync |index.html $ make-string $ html ({})
@@ -133,9 +124,7 @@
               body ({}) (comp-container)
             println "|Wrote to index.html"
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
-            :features $ #{} :js-ffi
+          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns app.main
           :require

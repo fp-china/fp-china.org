@@ -19,7 +19,23 @@ http://fp-china.org
 
 https://github.com/calcit-lang/respo-calcit-workflow
 
-### 使用者影响：正式 Calcit 0.31.0 与 Markdown 图
+### 使用者影响：Calcit 0.32.0 迁移候选
+
+CLI/procs 配对正式 0.32.0，需重新安装完整图并重建。UI/Markdown 模块暂为本地候选，
+正式标签整图尚待验证。四份 Markdown、链接、CSS 写出顺序和部署路径不变。
+站点仍是纯静态 SSR，原本没有浏览器 JS/HUD，本次不添加。
+
+官方格式化前后十个定义的完整视图一致，没有旧类型形式需要改写。
+0.32.0 默认严格类型诊断已替代弃用的 `--strict-types`，移除这个冗余参数，
+保留全部定义、动态方法警告、完整 strict 和原七项 SSR 测试。
+Actions 使用已核对原 SHA 的精确正式 tag，一小时依赖隔离和 COS 内置 verify 保持。
+本地全部 182 个定义、默认严格诊断、完整 strict（diagnostics 为空）、原七项 SSR
+测试、构建和 immutable 安装通过。实际静态首页内容、链接目标及刷新正常，
+warn/error 为空；构建仍仅输出 HTML/CSS，没有浏览器 JS bundle。
+独立只读评审无待处理问题。未访问外部站点，正式依赖整图和 PR/Linux CI 待验证。
+下方 0.31 说明为历史记录。
+
+### 历史：正式 Calcit 0.31.0 与 Markdown 图
 
 CLI/procs升级为正式 **0.31.0**，使用已发布Markdown0.5.0-alpha.4、Respo0.17.0-alpha.4、
 UI0.9.0-alpha.4及传递JS-FFI0.2.7、Router0.9.0-alpha.3，Vite 固定8.3.3。请重新安装完整图并重建，不混用旧alpha缓存。
@@ -41,7 +57,7 @@ or `package.cirru`.
 caps --strict --ci
 yarn install --immutable
 caps verify --toolchain
-calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
+calcit calcit.cirru --warn-dyn-method --check-only --all-defs
 calcit calcit.cirru fix --workflow strict --verify --format edn
 yarn build
 yarn test
