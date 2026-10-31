@@ -21,7 +21,7 @@ https://github.com/calcit-lang/respo-calcit-workflow
 
 ### 使用者影响：Calcit 0.32.1
 
-开发与 CI 配对升级为正式 Calcit / procs **0.32.1**。使用实际已发布 Markdown 0.5.0-alpha.5、Respo 0.17.1、UI 0.9.0，传递 JS-FFI 0.2.9、Router 0.9.0-alpha.4；明确保留仍需使用的 alpha，不将本地模块图当作发布图。请重新严格安装整图并重建，UI 更新不保证样式逐像素一致。
+开发与 CI 配对升级为正式 Calcit / procs **0.32.1**。使用实际已发布 Markdown 0.5.0、Respo 0.17.1、UI 0.9.0，传递 JS-FFI 0.2.9、Router 0.9.0-alpha.4；明确保留仍需使用的 alpha，不将本地模块图当作发布图。请重新严格安装整图并重建，UI 更新不保证样式逐像素一致。
 
 十个完整官方定义视图与规范化后的原 main 相同，代码、schema 和附带数据不变；本项目没有旧类型形式需要额外改写。四份 Markdown、链接、CSS 收集与写出顺序不改。站点仍为纯静态 SSR，不向浏览器发布 JS bundle；原本没有 HUD，本轮未添加或删除。项目版本仍为 0.1.0，不发版、不合并或生产部署。
 
