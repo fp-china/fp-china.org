@@ -19,58 +19,36 @@ http://fp-china.org
 
 https://github.com/calcit-lang/respo-calcit-workflow
 
-### 使用者影响：正式 Calcit 0.31.0 与 Markdown 图
+### 使用者影响：Calcit 0.32.1
 
-CLI/procs升级为正式 **0.31.0**，使用已发布Markdown0.5.0-alpha.4、Respo0.17.0-alpha.4、
-UI0.9.0-alpha.4及传递JS-FFI0.2.7、Router0.9.0-alpha.3，Vite 固定8.3.3。请重新安装完整图并重建，不混用旧alpha缓存。
-模块图仍含 alpha，UI升级可能有样式差异，不承诺逐像素相同；四份Markdown内容不改动。
-此前已迁移一处 Map merge 为方法，去掉一处单参数恒等包装，静态 CSS 值改为等价 String；
-全部公开 schema、写出顺序与原七项 SSR 测试保持。原站点不含浏览器 JS/HUD，不凭空添加。
-站点仍是纯静态 SSR；四份 Markdown、外部链接、共享资源及部署路径不变。
-CI保留all-defs、完整strict与原七项SSR测试，只删除重复namespace清单，
-不添加脚本、concurrently、预算或强转。本轮不合并/部署生产、不发布站点tag/npm。
-本轮只更新工具链与依赖配对，源码已兼容；不添加浏览器事件绑定。验收以本PR结果为准，历史0.30.1/alpha.5结果不作为新证明。
+开发与 CI 配对升级为正式 Calcit / procs **0.32.1**。使用实际已发布 Markdown 0.5.0、Respo 0.17.1、UI 0.9.0，传递 JS-FFI 0.2.9、Router 0.9.0-alpha.4；明确保留仍需使用的 alpha，不将本地模块图当作发布图。请重新严格安装整图并重建，UI 更新不保证样式逐像素一致。
 
-### Development and deployment
+十个完整官方定义视图与规范化后的原 main 相同，代码、schema 和附带数据不变；本项目没有旧类型形式需要额外改写。四份 Markdown、链接、CSS 收集与写出顺序不改。站点仍为纯静态 SSR，不向浏览器发布 JS bundle；原本没有 HUD，本轮未添加或删除。项目版本仍为 0.1.0，不发版、不合并或生产部署。
 
-Use Node.js 24 and Yarn 4.18.0. Only `calcit.cirru` and
-`deps.cirru` are source snapshots/manifests; do not recreate `compact.cirru`
-or `package.cirru`.
+### 开发与验证
+
+使用 Node.js 24、Yarn 4.18.0。新解析出的 npm 包版本必须已发布至少 60 分钟，本仓库未配置单包豁免；已有 immutable 锁版本不重新计算等待时间。
 
 ```sh
 caps --strict --ci
 yarn install --immutable
 caps verify --toolchain
-calcit calcit.cirru --strict-types --warn-dyn-method --check-only --all-defs
-calcit calcit.cirru fix --workflow strict --verify --format edn
+calcit --warn-dyn-method --check-only --all-defs
+calcit fix --workflow strict --verify --format edn
 yarn build
 yarn test
 ```
 
-This is a static server-rendered website. The Node.js Calcit entry reads all
-four Markdown files at compilation time and generates `index.html`; Vite
-builds that HTML and its stylesheet without shipping a browser JS bundle.
+本轮使用正式 0.32.1 和实际发布模块，通过全部定义、默认严格类型诊断、完整 strict、原七项 SSR 测试、canonical、Caps 严格解析与工具链配对、immutable 安装及构建。隔离浏览器首页、25 个链接目标与刷新正常，DOM 中无 script，捕获 warning/error 为空，未访问外链。原有 `--strict-types` 参数在 0.32 默认严格模式下已弃用，移除冗余参数；全部定义、动态方法警告、strict 及原七项断言保留，不放宽类型或添加验证脚本。
 
-`VITE_BASE_URL` selects the frontend asset base (default `./`). CI uses
-`https://cos-sh.tiye.me/fp-china/fp-china.org/`, with
-`/pr/<number>/<run-id>/<attempt>/` for isolated PR previews.
-COS uploads only `dist/`; cos-upload-action v1.2.0 performs public upload
-verification internally. Configure `COS_BUCKET`, `COS_SECRET_ID`, and
-`COS_SECRET_KEY` in repository secrets. PRs without credentials still test
-the build but do not prove that upload verification passed.
+Node 入口读取四份 Markdown 并生成 index.html，Vite 输出 HTML/CSS；保持源 Markdown 内容及已有外链。只维护 calcit.cirru/deps.cirru，不恢复 compact/package 或提交 js-out。
 
-The production rsync source remains `dist/*` and its destination remains
-`rsync-user@tiye.me:/web-assets/repo/fp-china/fp-china.org`. It runs only on
-main pushes, never for PRs. Markdown source, existing external links, and
-shared asset URLs are unchanged.
+### 前端部署
 
-本次本地验收未运行 Caps；开发者仍须执行上述安装步骤以生成模块链接，
-CI 独立执行 strict Caps 解析。此前程序 API 迁移将已退役的 `join-str` 改为 `join-string`，
-保持 CSS 收集与 HTML 写出顺序，不新增强转或校验脚本，不改动既有七项 SSR 断言。
+`VITE_BASE_URL` 指定资源基址（默认 `./`）。CI 使用 `https://cos-sh.tiye.me/fp-china/fp-china.org/`，PR 使用 `/pr/<number>/<run>/<attempt>/` 隔离前缀。原 workflow 下载精确已测试 dist artifact，不重新构建上传；COS action v1.2.0 只上传 dist/，使用内置 verify，不增加项目 checker。PR 缺凭据可继续测试，但不声称上传校验已通过。
 
-The normal CI uses all-definition checks, full strict workflow verification
-and the existing SSR tests. Uploads queue without cancellation, separately for
-each PR and production. The single production HEAD check skips superseded
-commits before reading credentials or deploying; API failures stop the job.
+上传按 PR/production 分队列、不取消；main HEAD 保护跳过过期提交，API 失败停止部署。原 rsync 源 dist/*、目标 `rsync-user@tiye.me:/web-assets/repo/fp-china/fp-china.org` 保持，仅 main push 执行，不部署后端。Actions 保留与原 SHA 对应的精确正式 tag，接受 tag 可移动风险。
 
-本 PR 不授权合并或生产部署。
+### 已有源码迁移
+
+此前已将 join-str 改为 join-string、Map merge 改为公开方法、静态 CSS 改为等价 String，并去掉恒等包装；本轮不重复改变这些代码。旧 alpha 验收不代替本轮正式 CLI 和实际模块图的原测试。本 PR 不授权合并或生产部署。
