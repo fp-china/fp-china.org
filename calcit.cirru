@@ -11,7 +11,7 @@
       :target :node
       :feature-policy $ {}
       :modules $ [] |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/
-      :type-slots $ {}
+      :type-slots $ {} $ :dispatch-op |app.config/DispatchOp
   :files $ {}
     'app.comp.container $ %{} 'FileEntry
       :defs $ {}
@@ -32,13 +32,13 @@
                 {} $ :style $ {} (:padding |16px) (:max-width |600px) (:margin |auto) (:font-size |16px)
                 comp-md-block (inline |events.md)
                   {} $ :style $ {}
-                =< nil 40
+                respo.comp.space/space-y 40
                 comp-md-block (inline |langs.md)
                   {} $ :style $ {}
-                =< nil 40
+                respo.comp.space/space-y 40
                 comp-md-block (inline |videos.md)
                   {} $ :style $ {}
-                =< nil 40
+                respo.comp.space/space-y 40
                 comp-md-block (inline |sites.md)
                   {} $ :style $ {}
           :examples $ []
@@ -62,7 +62,7 @@
                 {} $ :style $ .merge ui/row-middle
                   {} (:max-width |600px) (:margin |auto)
                 <> "|函数式编程中文社区" $ {} $ :font-size |24px
-                =< 16 nil
+                respo.comp.space/space-x 16
                 a $ {}
                   :style $ {} $ :color (hsl 200 70 90)
                   :inner-text "|讨论组"
@@ -83,10 +83,13 @@
             respo.util.format :refer $ hsl
             respo-ui.core :as ui
             respo.core :refer $ defcomp <> div a
-            respo.comp.space :refer $ =<
             respo-md.comp.md :refer $ comp-md-block
     'app.config $ %{} 'FileEntry
       :defs $ {}
+        'DispatchOp $ %{} 'CodeEntry (:doc "|为 Respo 的事件属性检查绑定操作类型。静态生成器不派发该代表值。")
+          :code $ quote $ def DispatchOp (:: :unhandled)
+          :examples $ []
+          :schema $ quote AnyEnum
         'dev? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def dev?
             = |dev $
