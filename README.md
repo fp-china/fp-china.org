@@ -19,11 +19,11 @@ http://fp-china.org
 
 https://github.com/calcit-lang/respo-calcit-workflow
 
-### 使用者影响：Calcit 0.32.1
+### 使用者影响
 
-开发与 CI 配对升级为正式 Calcit / procs **0.32.1**。使用实际已发布 Markdown 0.5.0、Respo 0.17.1、UI 0.9.0，传递 JS-FFI 0.2.9、Router 0.9.0-alpha.4；明确保留仍需使用的 alpha，不将本地模块图当作发布图。请重新严格安装整图并重建，UI 更新不保证样式逐像素一致。
+升级到正式 Calcit 和 `@calcit/procs` **0.35.1** 后，请重新安装依赖并重建。页面继续输出静态 HTML 和 CSS，四份 Markdown、导航链接和脚注照常生成。
 
-十个完整官方定义视图与规范化后的原 main 相同，代码、schema 和附带数据不变；本项目没有旧类型形式需要额外改写。四份 Markdown、链接、CSS 收集与写出顺序不改。站点仍为纯静态 SSR，不向浏览器发布 JS bundle；原本没有 HUD，本轮未添加或删除。项目版本仍为 0.1.0，不发版、不合并或生产部署。
+使用正式 Respo **0.19.4**、Markdown **0.8.1** 和 UI **0.15.1**，传递依赖 JS-FFI **0.2.13**、Router **0.12.1**。横纵间距使用对应的公开组件，静态渲染入口显式绑定 Respo 的操作类型槽，供事件属性的类型检查使用。
 
 ### 开发与验证
 
@@ -39,7 +39,7 @@ yarn build
 yarn test
 ```
 
-本轮使用正式 0.32.1 和实际发布模块，通过全部定义、默认严格类型诊断、完整 strict、原七项 SSR 测试、canonical、Caps 严格解析与工具链配对、immutable 安装及构建。隔离浏览器首页、25 个链接目标与刷新正常，DOM 中无 script，捕获 warning/error 为空，未访问外链。原有 `--strict-types` 参数在 0.32 默认严格模式下已弃用，移除冗余参数；全部定义、动态方法警告、strict 及原七项断言保留，不放宽类型或添加验证脚本。
+本地全定义和完整 strict、原七项 SSR 测试、Caps 校验、immutable 安装及构建通过。生成页面保留 Markdown、链接和样式，未重新执行浏览器交互。
 
 Node 入口读取四份 Markdown 并生成 index.html，Vite 输出 HTML/CSS；保持源 Markdown 内容及已有外链。只维护 calcit.cirru/deps.cirru，不恢复 compact/package 或提交 js-out。
 
