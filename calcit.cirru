@@ -11,7 +11,7 @@
       :target :node
       :feature-policy $ {}
       :modules $ [] |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/
-      :type-slots $ {} $ :dispatch-op |app.config/DispatchOp
+      :type-slots $ {} $ :dispatch-op 'app.config/DispatchOp
   :files $ {}
     'app.comp.container $ %{} 'FileEntry
       :defs $ {}
