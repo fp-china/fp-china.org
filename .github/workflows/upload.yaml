@@ -31,7 +31,7 @@ jobs:
         corepack prepare yarn@4.18.0 --activate
         yarn --version
 
-    - uses: calcit-lang/setup-calcit@v1.5.0
+    - uses: calcit-lang/setup-calcit@v1.5.1
       with:
         tools: calcit,caps
         caps-version: "0.1.1"
@@ -137,7 +137,7 @@ jobs:
 
     - name: Upload and publicly verify frontend assets
       if: steps.cos-credentials.outputs.available == 'true'
-      uses: worktools/cos-upload-action@v1.2.0
+      uses: worktools/cos-upload-action@8c4f3d09a4478b0d4c8698ffb94759b41831cba8 # v1.3.0
       with:
         source-dir: dist
         bucket: ${{ secrets.COS_BUCKET }}
