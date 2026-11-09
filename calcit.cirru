@@ -87,9 +87,9 @@
     'app.config $ %{} 'FileEntry
       :defs $ {}
         'DispatchOp $ %{} 'CodeEntry (:doc "|为 Respo 的事件属性检查绑定操作类型。静态生成器不派发该代表值。")
-          :code $ quote $ def DispatchOp (:: :unhandled)
+          :code $ quote $ defenum DispatchOp (:unhandled)
           :examples $ []
-          :schema $ quote AnyEnum
+          :schema $ quote EnumDef
         'dev? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def dev?
             = |dev $
