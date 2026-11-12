@@ -111,11 +111,11 @@
             println "|Running mode:" $ if config/dev? |dev |release
             write-html!
           :examples $ []
-          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
+          :schema $ quote $ Fn (-> Unit) (:features :io :js-ffi :state)
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (write-html!) (println "|Code updated.")
           :examples $ []
-          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
+          :schema $ quote $ Fn (-> Unit) (:features :io :js-ffi :state)
         'write-html! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn write-html! ()
             fs/writeFileSync |index.html $ make-string $ html ({})
@@ -127,7 +127,7 @@
               body ({}) (comp-container)
             println "|Wrote to index.html"
           :examples $ []
-          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
+          :schema $ quote $ Fn (-> Unit) (:features :io :js-ffi :state)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns app.main
           :require
