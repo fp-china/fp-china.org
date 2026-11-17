@@ -23,7 +23,7 @@
               comp-content
               comp-footer
           :examples $ []
-          :schema $ quote $ Fn (-> respo.schema/Component)
+          :schema $ quote $ Fn (-> respo.schema/Component) (:features :state)
         'comp-content $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-content ()
             div
@@ -42,7 +42,7 @@
                 comp-md-block (inline |sites.md)
                   {} $ :style $ {}
           :examples $ []
-          :schema $ quote $ Fn (-> respo.schema/Component)
+          :schema $ quote $ Fn (-> respo.schema/Component) (:features :state)
         'comp-footer $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defcomp comp-footer ()
             div
