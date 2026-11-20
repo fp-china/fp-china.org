@@ -21,9 +21,9 @@ https://github.com/calcit-lang/respo-calcit-workflow
 
 ### 使用者影响
 
-升级到正式 Calcit 和 `@calcit/procs` **0.42.1** 后，请重新安装依赖并重建。页面继续输出静态 HTML 和 CSS，四份 Markdown、导航链接和脚注照常生成。
+升级到正式 Calcit 和 `@calcit/procs` **0.44.0** 后，请重新安装依赖并重建。页面继续输出静态 HTML 和 CSS，四份 Markdown、导航链接和脚注照常生成。
 
-使用正式 Respo **0.19.5**、Markdown **0.8.2** 和 UI **0.15.2**，传递依赖 JS-FFI **0.2.13**、Router **0.12.2**。横纵间距使用对应的公开组件，静态渲染入口显式绑定 Respo 的操作类型槽，供事件属性的类型检查使用。
+使用正式 Respo **0.19.12**、Markdown **0.9.4** 和 UI **0.15.6**，传递依赖 JS-FFI **0.2.18**、Router **0.12.10**。横纵间距使用对应的公开组件，静态渲染入口显式绑定 Respo 的操作类型槽，供事件属性的类型检查使用。
 
 ### 开发与验证
 
@@ -45,7 +45,7 @@ Node 入口读取四份 Markdown 并生成 index.html，Vite 输出 HTML/CSS；�
 
 ### 前端部署
 
-`VITE_BASE_URL` 指定资源基址（默认 `./`）。CI 使用 `https://cos-sh.tiye.me/fp-china/fp-china.org/`，PR 使用 `/pr/<number>/<run>/<attempt>/` 隔离前缀。原 workflow 下载精确已测试 dist artifact，不重新构建上传；COS action v1.2.0 只上传 dist/，使用内置 verify，不增加项目 checker。PR 缺凭据可继续测试，但不声称上传校验已通过。
+`VITE_BASE_URL` 指定资源基址（默认 `./`）。CI 使用 `https://cos-sh.tiye.me/fp-china/fp-china.org/`，PR 使用 `/pr/<number>/<run>/<attempt>/` 隔离前缀。原 workflow 下载精确已测试 dist artifact，不重新构建上传；COS action v1.3.0 只上传 dist/，使用内置 verify，不增加项目 checker。PR 缺凭据可继续测试，但不声称上传校验已通过。
 
 上传按 PR/production 分队列、不取消；main HEAD 保护跳过过期提交，API 失败停止部署。原 rsync 源 dist/*、目标 `rsync-user@tiye.me:/web-assets/repo/fp-china/fp-china.org` 保持，仅 main push 执行，不部署后端。Actions 保留与原 SHA 对应的精确正式 tag，接受 tag 可移动风险。
 
