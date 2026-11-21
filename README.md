@@ -23,7 +23,7 @@ https://github.com/calcit-lang/respo-calcit-workflow
 
 升级到正式 Calcit 和 `@calcit/procs` **0.44.0** 后，请重新安装依赖并重建。页面继续输出静态 HTML 和 CSS，四份 Markdown、导航链接和脚注照常生成。
 
-使用正式 Respo **0.19.12**、Markdown **0.9.4** 和 UI **0.15.6**，传递依赖 JS-FFI **0.2.18**、Router **0.12.10**。横纵间距使用对应的公开组件，静态渲染入口显式绑定 Respo 的操作类型槽，供事件属性的类型检查使用。
+使用正式 Respo **0.19.13**、Markdown **0.9.5** 和 UI **0.15.7**，传递依赖 JS-FFI **0.2.19**、Router **0.12.11**。横纵间距使用对应的公开组件，静态渲染入口显式绑定 Respo 的操作类型槽，供事件属性的类型检查使用。
 
 ### 开发与验证
 
